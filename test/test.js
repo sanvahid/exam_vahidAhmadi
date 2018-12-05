@@ -10,7 +10,8 @@ describe('Checking session projects 8', function() {
        sumObjProp (salaries = {
         john : 200,
         ann : 160,
-        pete : 130
+        pete : 130,
+        name: 'John'
     }), 490);
     });
 
