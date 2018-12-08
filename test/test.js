@@ -3,59 +3,68 @@ const chai = require('chai');
 let assert = chai.assert;
 let expect = chai.expect;
 
-describe('Checking session projects 8', function() {
+describe('Checking calculator', function() {
 
-    it('sum object propertie', function() {
-      assert.equal(
-       sumObjProp (salaries = {
-        john : 200,
-        ann : 160,
-        pete : 130,
-        name: 'John'
-    }), 490);
+    it('test read', function() {
+      assert.equal(calculator.read(5),5 );
     });
 
-    it('multiply numeric prop by 2', function() {
-      expect(multiplyNumeric({
-        width : 200,
-        height : 350,
-        title : 'my menu'
-      })).to.deep.equal({
-        width : 400,
-        height : 700,
-        title : 'my menu'
-      });
+    it('test sum', function() {
+      assert.equal(calculator.sum(5),10 );
     });
 
-    
+    it('test mul', function() {
+      assert.equal(calculator.mul(5),50 );
+    });
+
   });
 
+  describe('Checking ladder', function() {
 
-function sumObjProp (obj) {
+    it('test chaining', function() {
+      assert.equal(ladder.up().up().up().down().showStep(),2 );
+    });
 
-  let sum = 0;
+  });
 
-  for (let prop in obj) {
+  let ladder = {
 
-      sum = sum + obj[prop];
+    step : 0,
+
+    up() {
+        this.step++;
+        return this;
+    },
+
+    down() {
+        this.step--;
+        return this;
+    },
+
+    showStep() {
+        return (this.step);
+    }
+
+ }
+
+
+  
+  
+  let calculator = {
+
+    number : 0,
+  
+    read(num) {
+      return this.number = num;
+    },
+  
+    sum(num) {
+        return this.number = this.number + num;
+    },
+
+    mul(num) {
+        return this.number = this.number * num;
+
+    }
+  
   }
-
-  return sum;
-}
-
-
-
-function multiplyNumeric (obj) {
-
-  for (let prop in obj) {
-
-      if (typeof obj[prop] === 'string') {
-          
-          continue;
-      }
-
-      obj[prop] = 2 * obj[prop];
-  }
-
-  return obj;
-}
