@@ -30,22 +30,20 @@ describe('Checking calculator', function() {
     });
 
     it('test read', function() {
-      assert.equal(accumulator.read(5), 10);
-    });
-
-    it('test value', function() {
+      accumulator.read(5);
+      
       assert.equal(accumulator.value(), 10);
     });
   });
 
 
 
-  function Accumulator(){
+  function Accumulator() { // Accumulator should get a number for initializing
   
     this.num = 0;
 
     this.read = function(num) {
-      return this.num += num;
+      this.num += num;  // doesn't need to return 
     };
 
     this.value = function() {
