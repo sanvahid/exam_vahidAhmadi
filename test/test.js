@@ -4,6 +4,9 @@ let assert = chai.assert;
 let expect = chai.expect;
 
 describe('Checking calculator', function() {
+
+  let calculator = new Calculator;
+
     it('test read', function() {
       assert.equal(calculator.read(5), 5);
     });
@@ -16,46 +19,53 @@ describe('Checking calculator', function() {
       assert.equal(calculator.mul(5), 50);
     });
   });
+  
 
-  describe('Checking ladder', function() {
-    it('test chaining', function() {
-      assert.equal(ladder.up().up().up().down().showStep(),2 );
+  describe('Checking accumulator', function() {
+
+    let accumulator = new Accumulator;
+
+    it('test read', function() {
+      assert.equal(accumulator.read(5), 5);
+    });
+
+    it('test read', function() {
+      assert.equal(accumulator.read(5), 10);
+    });
+
+    it('test value', function() {
+      assert.equal(accumulator.value(), 10);
     });
   });
 
-  let ladder = {
-    step : 0,
 
-    up() {
-        this.step++;
 
-        return this;
-    },
-
-    down() {
-        this.step--;
-
-        return this;
-    },
-
-    showStep() {
-        return (this.step);
-    }
- }; 
+  function Accumulator(){
   
-  
-  let calculator = {
-    number : 0,
-  
-    read(num) {
-      return this.number = num;
-    },
-  
-    sum(num) {
-        return this.number = this.number + num;
-    },
+    this.num = 0;
 
-    mul(num) {
-        return this.number = this.number * num;
-    }
-  }
+    this.read = function(num) {
+      return this.num += num;
+    };
+
+    this.value = function() {
+        return this.num;
+      };
+  };
+
+
+
+  function Calculator(){
+  
+    this.read = function(num) {
+      return this.num = num;
+    };
+  
+    this.sum = function(num) {
+      return this.num += num;
+    };
+
+    this.mul = function(num) {
+        return this.num *= num;
+      };
+  };

@@ -1,52 +1,41 @@
 "use strict";
-/*
-let calculator = {
 
-    number : 0,
+function Calculator(){
   
-    read(num) {
-      return this.number = num;
-    },
+    this.read = function(num) {
+      return this.num = num;
+    };
   
-    sum(num) {
-        return this.number = this.number + num;
-    },
+    this.sum = function(num) {
+      return this.num += num;
+    };
 
-    mul(num) {
-        return this.number = this.number * num;
+    this.mul = function(num) {
+        return this.num *= num;
+      };
+  };
 
-    }
+
+  let calculator = new Calculator;
+
+ 
+  function Accumulator(){
   
-  }
+    this.num = 0;
 
-  calculator.read(5);
+    this.read = function(num) {
+      return this.num += num;
+    };
 
- console.log( calculator.sum(5));
- console.log( calculator.sum(5));
- console.log( calculator.mul(5));
- console.log( calculator.read(5));
- console.log( calculator.mul(5));
+    this.value = function() {
+        return this.num;
+      };
+  };
 
- */
+  let accumulator = new Accumulator;
+  console.log(accumulator.read(5));
+  console.log(accumulator.read(1));
+  console.log(accumulator.read(1));
 
- let ladder = {
+  console.log(accumulator.value());
 
-    step : 0,
-
-    up() {
-        this.step = this.step + 1;
-        return this;
-    },
-
-    down() {
-        this.step = this.step - 1;
-        return this;
-    },
-
-    showStep() {
-        alert (this.step);
-    }
-
- }
-
-ladder.up().down().showStep();
