@@ -3,67 +3,95 @@ const chai = require('chai');
 let assert = chai.assert;
 let expect = chai.expect;
 
-describe('Checking calculator', function() {
+describe('Checking sumTwoNum', function() {
 
-  let calculator = new Calculator;
-
-    it('test read', function() {
-      assert.equal(calculator.read(5), 5);
+    it('test sumTwoNum', function() {
+      assert.equal(sumTwoNum(0.3, 0.4), 0.7);
     });
 
-    it('test sum', function() {
-      assert.equal(calculator.sum(5), 10);
-    });
-
-    it('test mul', function() {
-      assert.equal(calculator.mul(5), 50);
-    });
   });
   
 
-  describe('Checking accumulator', function() {
+  describe('Checking random float', function() {
 
-    let accumulator = new Accumulator;
-
-    it('test read', function() {
-      assert.equal(accumulator.read(5), 5);
+    it('test random float', function() {
+      expect(random(1, 2)).to.be.within(1,2); 
     });
+  });
 
-    it('test read', function() {
-      accumulator.read(5);
-      
-      assert.equal(accumulator.value(), 10);
+  describe('Checking random integer', function() {
+
+    it('test random integer', function() {
+      expect(randomInt(1, 5)).to.be.within(1,5); 
+    });
+  });
+
+  describe('Checking spam', function() {
+
+    it('test spam', function() {
+      assert.equal(checkSpam('free viagrA'), true);
+    });
+  });
+
+  describe('Checking extract currency value', function() {
+
+    it('test extractCurrencyValue', function() {
+      assert.equal(extractCurrencyValue('$120'), '120');
     });
   });
 
 
 
-  function Accumulator() { // Accumulator should get a number for initializing
+
+
+/////////////////////////////////////////functions////////////////////////////////////
+
+  function sumTwoNum(num1, num2) {
+
+    // let num1 = +prompt("enter num1");
+    // let num2 = +prompt("enter num2");
   
-    this.num = 0;
-
-    this.read = function(num) {
-      this.num += num;  // doesn't need to return 
-    };
-
-    this.value = function() {
-        return this.num;
-      };
-  };
-
-
-
-  function Calculator(){
+    let result = floatFixed(num1 + num2);
+    return (result);
   
-    this.read = function(num) {
-      return this.num = num;
-    };
+  }
   
-    this.sum = function(num) {
-      return this.num += num;
-    };
+  function floatFixed(num) {
+    if (parseInt(num) === num) {
+      return num;
+    } else {
+      return +num.toFixed(2);
+    }
+  }
 
-    this.mul = function(num) {
-        return this.num *= num;
-      };
-  };
+  function random(min, max) {
+  
+   return (Math.random() * (max-1) + min);
+  }
+
+  function randomInt(min, max) {
+  
+    return (Math.floor(Math.random() * (max-1) + min));
+   }
+
+
+function checkSpam(msg) {
+
+  msg = msg.toLowerCase();
+
+  if (msg.includes("xxx") || msg.includes("viagra")){
+    return true;
+  }else return false;
+}
+
+
+function extractCurrencyValue(price) {
+
+  if (price.startsWith('$')) {
+
+    return (price.substr(1));
+
+  }else if (price.endsWith('$')) {
+    return (parseInt(price));
+  }else return (price);
+}
