@@ -9,34 +9,51 @@ describe('Checking sumTwoNum', function() {
       assert.equal(sumTwoNum(0.3, 0.4), 0.7);
     });
 
+    it('adds 0.1, and 0.2', function() {
+      assert.equal(sumTwoNum(0.1, 0.2), 0.3);
+    }) ;
   });
   
 
   describe('Checking random float', function() {
-
     it('test random float', function() {
       expect(random(1, 2)).to.be.within(1,2); 
     });
   });
 
   describe('Checking random integer', function() {
-
+    let num = randomInt(1, 5);
     it('test random integer', function() {
-      expect(randomInt(1, 5)).to.be.within(1,5); 
+      expect(num).to.be.within(1,5); 
+    });
+    it('test if the result is Integer', function() {
+      expect(num % 1).to.be.equal(0);
     });
   });
 
   describe('Checking spam', function() {
-
     it('test spam', function() {
       assert.equal(checkSpam('free viagrA'), true);
     });
+    it ('check for xxX', function() {
+      assert.isTrue(checkSpam('Hello xxX'));
+    });
+    it('Returns false if there is no spam', () => {
+      assert.isFalse(checkSpam('Hello there.'));
+    });
   });
 
+  // There we have a small error. extract currency should return number not a string.
   describe('Checking extract currency value', function() {
-
     it('test extractCurrencyValue', function() {
       assert.equal(extractCurrencyValue('$120'), '120');
+    });
+    it('get number pars of 120$', () => {
+      assert.strictEqual(extractCurrencyValue('120$', 120));
+    });
+
+    it('get number pars of $120', () => {
+      assert.strictEqual(extractCurrencyValue('$120', 120));
     });
   });
 
